@@ -5,9 +5,17 @@ export function getFilmsFromApiWithSearchedText (text, page) {
     '&language=fr&query=' + text + '&page=' + page;
     return fetch(url)
         .then((response) => response.json())
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
 }
 
 export function getImageFromApi(name) {
     return 'https://image.tmdb.org/t/p/w300' + name
+}
+
+export function getgetFilmDetailsFromApi(id) {
+    const url = 'https://api.themoviedb.org/3/movie/' + 
+    id + '?api_key=' + API_TOKEN + '&language=fr';
+    return fetch(url)
+        .then((response) => response.json())
+        .catch((error) => console.error(error));
 }

@@ -3,8 +3,15 @@ import Search from '../components/Search';
 import FilmDetails from '../components/FilmDetails';
 
 const searchStackNavigator = createStackNavigator({
-    Search: Search,
-    FilmDetails: FilmDetails
+    Search: {
+        screen: Search,
+        navigationOptions: {
+            title: 'Rechercher'
+        }
+    },
+    FilmDetails: {
+        screen: FilmDetails
+    } 
 });
 
 const appContainer = createAppContainer(searchStackNavigator);
