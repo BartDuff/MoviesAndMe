@@ -12,7 +12,7 @@ export function getImageFromApi(name) {
     return 'https://image.tmdb.org/t/p/w300' + name
 }
 
-export function getgetFilmDetailsFromApi(id) {
+export function getFilmDetailsFromApi(id) {
     const url = 'https://api.themoviedb.org/3/movie/' + 
     id + '?api_key=' + API_TOKEN + '&language=fr';
     return fetch(url)
