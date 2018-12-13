@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Button, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TextInput, Button, ActivityIndicator, SafeAreaView } from 'react-native';
 //import filmsData from '../helpers/filmsData';
 import FilmList from './FilmList';
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
@@ -20,11 +20,11 @@ class Search extends React.Component {
     _loadFilms = () => {
         if (this.searchedText.length > 0) {
             this.setState({ isLoading: true }) // on lance le chargement
-            getFilmsFromApiWithSearchedText(this.searchedText, this.page+1).then(data => {
+            getFilmsFromApiWithSearchedText(this.searchedText, this.page + 1).then(data => {
                 this.page = data.page;
                 this.totalPages = data.total_pages;
                 this.setState({
-                    films: [ ...this.state.films, ...data.results ],
+                    films: [...this.state.films, ...data.results],
                     isLoading: false // on arrête le chargement
                 });
             });
@@ -57,24 +57,26 @@ class Search extends React.Component {
 
     render() {
         return (
-            <View style={styles.main_container}>
-                <TextInput
-                    style={[styles.textinput, { marginBottom: 10 }]}
-                    placeholder='Titre du film'
-                    onChangeText={(text) => this._searchTextInputChanged(text)}
-                    onSubmitEditing={() => this._searchFilms()}
-                />
-                <Button style={{ height: 50 }} title='Rechercher' onPress={() => this._searchFilms()} />
-                <FilmList
-                films={this.state.films}
-                navigation={this.props.navigation}
-                loadFilms={this._loadFilms}
-                page={this.page}
-                totalPages={this.totalPages}
-                favoriteList={false}
-                />
-                {this._displayLoading()}
-            </View>
+            <SafeAreaView style={styles.main_container}>
+                <View style={styles.main_container}>
+                    <TextInput
+                        style={[styles.textinput, { marginBottom: 10 }]}
+                        placeholder='Titre du film'
+                        onChangeText={(text) => this._searchTextInputChanged(text)}
+                        onSubmitEditing={() => this._searchFilms()}
+                    />
+                    <Button style={{ height: 50 }} title='Rechercher' onPress={() => this._searchFilms()} />
+                    <FilmList
+                        films={this.state.films}
+                        navigation={this.props.navigation}
+                        loadFilms={this._loadFilms}
+                        page={this.page}
+                        totalPages={this.totalPages}
+                        favoriteList={false}
+                    />
+                    {this._displayLoading()}
+                </View>
+            </SafeAreaView>
         )
     }
 }

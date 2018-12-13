@@ -14,7 +14,7 @@ const searchStackNavigator = createStackNavigator({
     },
     FilmDetails: {
         screen: FilmDetails
-    } 
+    }
 });
 
 const favoritesStackNavigator = createStackNavigator({
@@ -26,7 +26,7 @@ const favoritesStackNavigator = createStackNavigator({
     },
     FilmDetails: {
         screen: FilmDetails
-    } 
+    }
 });
 
 const MoviesTabNavigator = createBottomTabNavigator({
@@ -36,8 +36,8 @@ const MoviesTabNavigator = createBottomTabNavigator({
             tabBarIcon: () => {
                 return (
                     <Image
-                    source={require('../assets/images/ic_search.png')}
-                    style={styles.icon}/>
+                        source={require('../assets/images/ic_search.png')}
+                        style={styles.icon} />
                 )
             }
         }
@@ -48,21 +48,21 @@ const MoviesTabNavigator = createBottomTabNavigator({
             tabBarIcon: () => {
                 return (
                     <Image
-                    source={require('../assets/images/ic_favorite.png')}
-                    style={styles.icon}/>
+                        source={require('../assets/images/ic_favorite.png')}
+                        style={styles.icon} />
                 )
             }
         }
     }
 },
-{
-    tabBarOptions: {
-        activeBackgroundColor: '#DDDDDD',
-        inactiveBackgroundColor: '#FFFFFF',
-        showLabel: false,
-        showIcon: true
-    }
-})
+    {
+        tabBarOptions: {
+            activeBackgroundColor: '#DDDDDD',
+            inactiveBackgroundColor: '#FFFFFF',
+            showLabel: false,
+            showIcon: true
+        }
+    })
 
 const styles = StyleSheet.create({
     icon: {

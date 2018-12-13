@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import { getImageFromApi } from '../API/TMDBApi';
+import FadeIn from '../Animations/FadeIn';
 
 class FilmItem extends React.Component {
 
     _displayFavoriteImage() {
-        if(this.props.isFilmFavorite) {
+        if (this.props.isFilmFavorite) {
             return (
                 <Image
-                style={styles.favorite_image}
-                source={require('../assets/images/ic_favorite.png')}
+                    style={styles.favorite_image}
+                    source={require('../assets/images/ic_favorite.png')}
                 />
             )
         }
@@ -18,26 +19,28 @@ class FilmItem extends React.Component {
     render() {
         const { film, displayDetailsForFilm } = this.props;
         return (
-            <TouchableOpacity style={styles.main_container}
-                              onPress={() => this.props.displayDetailsForFilm(film.id)}>
-                <Image
-                    style={styles.image}
-                    source={{uri: getImageFromApi(film.poster_path)}}
-                />
-                <View style={styles.content_container}>
-                    <View style={styles.header_container}>
-                        {this._displayFavoriteImage()}
-                        <Text style={styles.title_text} numberOfLines={2}>{film.title}</Text>
-                        <Text style={styles.vote_text}>{film.vote_average}</Text>
+            <FadeIn>
+                <TouchableOpacity style={styles.main_container}
+                    onPress={() => this.props.displayDetailsForFilm(film.id)}>
+                    <Image
+                        style={styles.image}
+                        source={{ uri: getImageFromApi(film.poster_path) }}
+                    />
+                    <View style={styles.content_container}>
+                        <View style={styles.header_container}>
+                            {this._displayFavoriteImage()}
+                            <Text style={styles.title_text} numberOfLines={2}>{film.title}</Text>
+                            <Text style={styles.vote_text}>{film.vote_average}</Text>
+                        </View>
+                        <View style={styles.description_container}>
+                            <Text style={styles.description_text} numberOfLines={6}>{film.overview}</Text>
+                        </View>
+                        <View style={styles.description_container}>
+                            <Text style={styles.date_text}>Sorti le {film.release_date}</Text>
+                        </View>
                     </View>
-                    <View style={styles.description_container}>
-                        <Text style={styles.description_text} numberOfLines={6}>{film.overview}</Text>
-                    </View>
-                    <View style={styles.description_container}>
-                        <Text style={styles.date_text}>Sorti le {film.release_date}</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </FadeIn>
         )
     }
 }
